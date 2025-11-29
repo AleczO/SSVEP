@@ -2,7 +2,10 @@ import scipy.io
 import mne
 import matplotlib.pyplot as plt
 
-def process_for_psd():
+
+
+
+def process():
     mat_raw = scipy.io.loadmat("Data/P01_Ses1.mat")
     raw_array = mat_raw["data_ses1"][1:]
 
@@ -14,20 +17,6 @@ def process_for_psd():
 
     raw = mne.io.RawArray(raw_array, info)
     raw.pick_types(eeg=True)
-
-    return raw 
-
-
-def process():
-    mat_raw = scipy.io.loadmat("Data/P01_Ses1.mat")
-    raw_array = mat_raw["data_ses1"][1:]
-
-    ch_names = ["PO3", "POz", "PO4", "O1", "Oz", "O2", "02", "03", "04"]
-
-    info = mne.create_info(ch_names = ch_names, sfreq=512)
-    info.set_montage("standard_1020")
-
-    raw = mne.io.RawArray(raw_array, info)
 
     return raw 
 
@@ -44,7 +33,7 @@ def Hz_channels():
 
 Hz_channels()
 
-raw = process_for_psd()
+raw = process()
 
 raw = process()
 raw.plot(block=True, scalings='auto')
